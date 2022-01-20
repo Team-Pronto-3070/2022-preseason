@@ -14,6 +14,17 @@ package frc.robot;
  */
 public final class Constants {
 
+    public static final class DRIVE {
 
-    
+        // Talon Port Values
+        public static final int TAL_FL_PORT = 0;
+        public static final int TAL_BL_PORT = 0;
+        public static final int TAL_FR_PORT = 0;
+        public static final int TAL_BR_PORT = 0;
+
+        public static final double RAMP_TIME = 0;
+
+
+    }
+
 }
