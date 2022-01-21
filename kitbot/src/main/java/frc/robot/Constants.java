@@ -16,15 +16,23 @@ public final class Constants {
 
     public static final class DRIVE {
 
-        // Talon Port Values
-        public static final int TAL_FL_PORT = 0;
-        public static final int TAL_BL_PORT = 0;
-        public static final int TAL_FR_PORT = 0;
-        public static final int TAL_BR_PORT = 0;
-
-        public static final double RAMP_TIME = 0;
-
-
+        public static final int TAL_FL_CHANNEL = 0;
+        public static final int TAL_BL_CHANNEL = 0;
+        public static final int TAL_FR_CHANNEL = 0;
+        public static final int TAL_BR_CHANNEL = 0;
+        
     }
 
+    public static final class TELEOP_COMMAND {
+        public static final double JOY_STICK_DEADZONE = 0;
+
+        public static final double VY_COEFFICIENT = 1;
+        public static final double VX_COEFFICIENT = 1;
+    }
+
+    public static final class OI {
+
+        public static final int JOY_PORT = 0;
+
+    }
 }

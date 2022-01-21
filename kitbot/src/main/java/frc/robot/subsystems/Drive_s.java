@@ -1,8 +1,8 @@
 package frc.robot.subsystems;
 
-import com.ctre.phoenix.motorcontrol.ControlMode;
-import com.ctre.phoenix.motorcontrol.can.TalonFX;
-
+import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.motorcontrol.PWMTalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
@@ -11,54 +11,25 @@ import frc.robot.Constants;
  * Drive subsystem
  */
 public class Drive_s extends SubsystemBase{
+    // Right motor controllers
+    private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(
+        new PWMTalonFX(Constants.DRIVE.TAL_FR_CHANNEL), 
+        new PWMTalonFX(Constants.DRIVE.TAL_BR_CHANNEL));
 
-    // declare talons
-    TalonFX talFL;
-    TalonFX talBL;
-    TalonFX talFR;
-    TalonFX talBR;
+    // Left motor controllers
+    private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(
+        new PWMTalonFX(Constants.DRIVE.TAL_FL_CHANNEL), 
+        new PWMTalonFX(Constants.DRIVE.TAL_BL_CHANNEL));
+
+    // The robot's drive
+    private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
     
     public Drive_s() {
-        talFL = new TalonFX(Constants.DRIVE.TAL_FL_PORT);
-        talBL = new TalonFX(Constants.DRIVE.TAL_BL_PORT);
-        talFR = new TalonFX(Constants.DRIVE.TAL_FR_PORT);
-        talBR = new TalonFX(Constants.DRIVE.TAL_BR_PORT);
-
-        talFL.configOpenloopRamp(Constants.DRIVE.RAMP_TIME);
-        talBL.configOpenloopRamp(Constants.DRIVE.RAMP_TIME);
-        talFR.configOpenloopRamp(Constants.DRIVE.RAMP_TIME);
-        talBR.configOpenloopRamp(Constants.DRIVE.RAMP_TIME);
-
-        // invert one side TODO: Test which side needs inversion
-        talFR.setInverted(true);
-        talBR.setInverted(true);
+        // Invert one side of the drive train
+        m_rightMotors.setInverted(true);
     }
 
-    /**
-     * Set talons to given input speeds.
-     * @param velocityL
-     * @param velocityR
-     */
-    public void setSpeed(double velocityL, double velocityR) {
-        // set left speeds
-        talFL.set(ControlMode.PercentOutput, velocityL);
-        talBL.set(ControlMode.Follower, Constants.DRIVE.TAL_FL_PORT);
-
-        // set right speeds
-        talFR.set(ControlMode.PercentOutput, velocityR);
-        talBR.set(ControlMode.Follower, Constants.DRIVE.TAL_FR_PORT);
-    }
-
-    /**
-     * Stop robot
-     */
-    public void stop() {
-        // stop left motors
-        talFL.set(ControlMode.PercentOutput, 0);
-        talBL.set(ControlMode.Follower, Constants.DRIVE.TAL_FL_PORT);
-
-        // stop right speeds
-        talFR.set(ControlMode.PercentOutput, 0);
-        talBR.set(ControlMode.Follower, Constants.DRIVE.TAL_FR_PORT);
+    public void arcadeDrive(double forwardSpeed, double rotation) {
+        m_drive.arcadeDrive(forwardSpeed, rotation);
     }
 }
