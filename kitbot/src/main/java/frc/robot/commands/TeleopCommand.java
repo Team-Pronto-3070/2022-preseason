@@ -28,7 +28,7 @@ public class TeleopCommand extends CommandBase {
         SmartDashboard.putNumber("teleop_theta", _oi.getTheta());
 
         _drive.arcadeDrive(
-            (Math.abs(_oi.getY()) < Constants.TELEOP_COMMAND.JOY_STICK_DEADZONE) ? 0 : _oi.getY() * Constants.TELEOP_COMMAND.VY_COEFFICIENT, 
-            (Math.abs(_oi.getX()) < Constants.TELEOP_COMMAND.JOY_STICK_DEADZONE) ? 0 : _oi.getX() * Constants.TELEOP_COMMAND.VX_COEFFICIENT);
+            (Math.abs(_oi.getX()) < Constants.TELEOP_COMMAND.JOY_STICK_DEADZONE) ? 0 : _oi.getX() * Constants.TELEOP_COMMAND.VX_COEFFICIENT, 
+            (Math.abs(_oi.getTheta()) < Constants.TELEOP_COMMAND.JOY_STICK_OMEGA_DEADZONE) ? 0 : _oi.getTheta() * Constants.TELEOP_COMMAND.OMEGA_COEFFICIENT);
   }
 }

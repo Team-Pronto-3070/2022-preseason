@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 public class OI {
     
     /* Class Variable Declaration */
-    private HashMap<String, Joystick> joyMap;
     private HashMap<String, JoystickButton> buttons;
     
     private Joystick joystick;
@@ -23,7 +22,6 @@ public class OI {
      */
     public OI() {
         /* Class Variable Instantiation */
-        joyMap = new HashMap<>();
         buttons = new HashMap<>();
     
         joystick = new Joystick(Constants.OI.JOY_PORT);

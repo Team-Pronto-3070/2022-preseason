@@ -20,14 +20,15 @@ public final class Constants {
         public static final int TAL_BL_CHANNEL = 0;
         public static final int TAL_FR_CHANNEL = 0;
         public static final int TAL_BR_CHANNEL = 0;
-        
+
     }
 
     public static final class TELEOP_COMMAND {
         public static final double JOY_STICK_DEADZONE = 0;
+        public static final double JOY_STICK_OMEGA_DEADZONE = 0;
 
-        public static final double VY_COEFFICIENT = 1;
         public static final double VX_COEFFICIENT = 1;
+        public static final double OMEGA_COEFFICIENT = 1;
     }
 
     public static final class OI {
