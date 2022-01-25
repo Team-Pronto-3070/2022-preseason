@@ -24,7 +24,6 @@ public class TeleopCommand extends CommandBase {
     @Override
     public void execute() {
         SmartDashboard.putNumber("teleop_x", _oi.getX());
-        SmartDashboard.putNumber("teleop_y", _oi.getY());
         SmartDashboard.putNumber("teleop_theta", _oi.getTheta());
 
         _drive.arcadeDrive(

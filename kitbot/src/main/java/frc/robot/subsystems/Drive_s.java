@@ -1,9 +1,10 @@
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
-import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import frc.robot.Constants;
@@ -12,22 +13,41 @@ import frc.robot.Constants;
  * Drive subsystem
  */
 public class Drive_s extends SubsystemBase{
-    // Right motor controllers
-    private final MotorControllerGroup m_leftMotors = new MotorControllerGroup(
-        new WPI_TalonSRX(Constants.DRIVE.TAL_FR_CHANNEL), 
-        new WPI_TalonSRX(Constants.DRIVE.TAL_BR_CHANNEL));
+    
+    private WPI_TalonSRX talLF;
+    private WPI_TalonSRX talLB;
+    private WPI_TalonSRX talRF;
+    private WPI_TalonSRX talRB;
 
-    // Left motor controllers
-    private final MotorControllerGroup m_rightMotors = new MotorControllerGroup(
-        new WPI_TalonSRX(Constants.DRIVE.TAL_FL_CHANNEL), 
-        new WPI_TalonSRX(Constants.DRIVE.TAL_BL_CHANNEL));
-
-    // The robot's drive
-    private final DifferentialDrive m_drive = new DifferentialDrive(m_leftMotors, m_rightMotors);
+    private DifferentialDrive diffDrive;
+    
     
     public Drive_s() {
-        // Invert one side of the drive train
-        m_rightMotors.setInverted(true);
+
+        talLF = new WPI_TalonSRX(Constants.DRIVE.TAL_LF_ID);
+        talLB = new WPI_TalonSRX(Constants.DRIVE.TAL_LB_ID);
+        talRF = new WPI_TalonSRX(Constants.DRIVE.TAL_RF_ID);
+        talRB = new WPI_TalonSRX(Constants.DRIVE.TAL_RB_ID);
+
+        talLF.configFactoryDefault();
+        talLB.configFactoryDefault();
+        talRF.configFactoryDefault();
+        talRB.configFactoryDefault();
+
+        talLF.setNeutralMode(NeutralMode.Coast);
+        talLB.setNeutralMode(NeutralMode.Coast);
+        talRF.setNeutralMode(NeutralMode.Coast);
+        talRB.setNeutralMode(NeutralMode.Coast);
+
+        talLF.setInverted(false);
+        talLB.setInverted(false);
+        talRF.setInverted(true);
+        talRB.setInverted(true);
+
+        talLB.follow(talLF);
+        talRB.follow(talRF);
+
+        diffDrive = new DifferentialDrive(talLF, talRF);
     }
 
     /**
@@ -36,6 +56,14 @@ public class Drive_s extends SubsystemBase{
      * @param rotation
      */
     public void arcadeDrive(double forwardSpeed, double rotation) {
-        m_drive.arcadeDrive(forwardSpeed, rotation);
+        diffDrive.arcadeDrive(forwardSpeed, rotation);
+    }
+
+    @Override
+    public void periodic() {
+        SmartDashboard.putNumber("talLF", talLF.get());
+        SmartDashboard.putNumber("talLR", talLB.get());
+        SmartDashboard.putNumber("talBF", talRF.get());
+        SmartDashboard.putNumber("talBR", talRB.get());
     }
 }
