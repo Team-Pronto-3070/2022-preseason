@@ -16,10 +16,10 @@ public final class Constants {
 
     public static final class DRIVE {
 
-        public static final int TAL_FL_CHANNEL = 0;
-        public static final int TAL_BL_CHANNEL = 0;
-        public static final int TAL_FR_CHANNEL = 0;
-        public static final int TAL_BR_CHANNEL = 0;
+        public static final int TAL_FL_CHANNEL = 1;
+        public static final int TAL_BL_CHANNEL = 2;
+        public static final int TAL_FR_CHANNEL = 3;
+        public static final int TAL_BR_CHANNEL = 4;
 
     }
 
