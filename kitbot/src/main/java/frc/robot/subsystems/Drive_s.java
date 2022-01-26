@@ -34,10 +34,10 @@ public class Drive_s extends SubsystemBase{
         talRF.configFactoryDefault();
         talRB.configFactoryDefault();
 
-        talLF.setNeutralMode(NeutralMode.Coast);
-        talLB.setNeutralMode(NeutralMode.Coast);
-        talRF.setNeutralMode(NeutralMode.Coast);
-        talRB.setNeutralMode(NeutralMode.Coast);
+        talLF.setNeutralMode(NeutralMode.Brake);
+        talLB.setNeutralMode(NeutralMode.Brake);
+        talRF.setNeutralMode(NeutralMode.Brake);
+        talRB.setNeutralMode(NeutralMode.Brake);
 
         talLF.setInverted(false);
         talLB.setInverted(false);
@@ -57,6 +57,10 @@ public class Drive_s extends SubsystemBase{
      */
     public void arcadeDrive(double forwardSpeed, double rotation) {
         diffDrive.arcadeDrive(forwardSpeed, rotation);
+    }
+
+    public void curvatureDrive(double speed, double rotation) {
+        diffDrive.curvatureDrive(speed, rotation, true);
     }
 
     @Override

@@ -63,6 +63,6 @@ public class OI {
     }
 
     public double getTheta(){
-        return -joystick.getRawAxis(0);
+        return joystick.getRawAxis(0);
     }
 }

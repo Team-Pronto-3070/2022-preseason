@@ -16,10 +16,10 @@ public final class Constants {
 
     public static final class DRIVE {
 
-        public static final int TAL_LF_ID = 1;
-        public static final int TAL_LB_ID = 2;
-        public static final int TAL_RF_ID = 3;
-        public static final int TAL_RB_ID = 4;
+        public static final int TAL_LF_ID = 4;
+        public static final int TAL_LB_ID = 3;
+        public static final int TAL_RF_ID = 2;
+        public static final int TAL_RB_ID = 1;
 
     }
 
@@ -28,7 +28,7 @@ public final class Constants {
         public static final double JOY_STICK_OMEGA_DEADZONE = 0.15;
 
         public static final double VX_COEFFICIENT = 1;
-        public static final double OMEGA_COEFFICIENT = 1;
+        public static final double OMEGA_COEFFICIENT = .5;
     }
 
     public static final class OI {
