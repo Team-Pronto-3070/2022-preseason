@@ -3,6 +3,7 @@ package frc.robot;
 import java.util.HashMap;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
@@ -16,6 +17,7 @@ public class OI {
     private HashMap<String, JoystickButton> buttons;
     
     private Joystick joystick;
+    private XboxController xbox;
 
     /**
      * Constructs the Operator Interface.
@@ -24,15 +26,15 @@ public class OI {
         /* Class Variable Instantiation */
         buttons = new HashMap<>();
     
-        joystick = new Joystick(Constants.OI.JOY_PORT);
-    }
+        switch (Constants.OI.CONTROLLER) {
+            case JOYSTICK:     
+                joystick = new Joystick(Constants.OI.JOY_PORT);
+                break;
+            case XBOX: 
+                xbox = new XboxController(Constants.OI.XBOX_PORT);
+                break;
 
-    /**
-     * @param name of a joystick in the OI.
-     * @return A desired Joystick object from the OI.
-     */
-    public Joystick getController() {
-       return joystick;
+        }
     }
 
     /**
@@ -47,7 +49,14 @@ public class OI {
      * @param number assigned to the button by the controller in the Driver Station.
      */
     public void addButton(String name, int number) {
-        buttons.put(name, new JoystickButton(joystick, number));
+        switch (Constants.OI.CONTROLLER) {
+            case JOYSTICK:
+                buttons.put(name, new JoystickButton(joystick, number));
+                break;
+            case XBOX:
+                buttons.put(name, new JoystickButton(xbox, number));
+        }
+        //buttons.put(name, new JoystickButton(joystick, number));
     }
 
     /**
@@ -59,10 +68,26 @@ public class OI {
     }
 
     public double getX(){
-        return -joystick.getRawAxis(1);
+        switch (Constants.OI.CONTROLLER) {
+            case JOYSTICK:
+                return -joystick.getRawAxis(1);
+            case XBOX: 
+                return -xbox.getLeftY();
+            default: 
+                throw new RuntimeException("No controller selected");
+        }
+        //return -joystick.getRawAxis(1);
     }
 
     public double getTheta(){
-        return joystick.getRawAxis(0);
+        switch (Constants.OI.CONTROLLER) {
+            case JOYSTICK: 
+                return joystick.getRawAxis(0);
+            case XBOX: 
+                return xbox.getLeftX();
+            default: 
+                throw new RuntimeException("No controller selected");
+        }
+        //return joystick.getRawAxis(0);
     }
 }

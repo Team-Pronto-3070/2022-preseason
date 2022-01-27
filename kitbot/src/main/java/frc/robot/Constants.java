@@ -25,7 +25,7 @@ public final class Constants {
 
     public static final class TELEOP_COMMAND {
         public static final double JOY_STICK_DEADZONE = 0.15;
-        public static final double JOY_STICK_OMEGA_DEADZONE = 0.15;
+        public static final double JOY_STICK_OMEGA_DEADZONE = 0.25;
 
         public static final double VX_COEFFICIENT = 1;
         public static final double OMEGA_COEFFICIENT = .5;
@@ -34,6 +34,14 @@ public final class Constants {
     public static final class OI {
 
         public static final int JOY_PORT = 0;
+        public static final int XBOX_PORT = 2;
+
+        public static final Controller CONTROLLER =  Controller.XBOX;
+
+        public static enum Controller {
+            XBOX, JOYSTICK 
+        }
 
     }
+
 }
